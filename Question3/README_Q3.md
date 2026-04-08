@@ -158,29 +158,7 @@ A summary table can be included here after running the script.
 
 ### 1. Training Loss vs Number of Iterations
 
-_Insert the plot here._
-
-```markdown
-![Training Loss vs Iterations](path/to/q3_training_loss_vs_iterations.png)
-```
-
-
-### 2. Optional Additional Plot / Screenshot
-
-_Insert plot or screenshot here if needed._
-
-```markdown
-![Optional Plot 2](path/to/optional_plot_2.png)
-```
-
-
-### 3. Optional Additional Plot / Screenshot
-
-_Insert plot or screenshot here if needed._
-
-```markdown
-![Optional Plot 3](path/to/optional_plot_3.png)
-```
+<img width="764" height="470" alt="image" src="https://github.com/user-attachments/assets/4cf5cdf0-fbbe-4e35-bf9a-362cb84d1806" />
 
 ---
 
