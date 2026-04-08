@@ -179,31 +179,19 @@ Even when the attack is weak overall, comparing the ROC curves and AUC values st
 
 ### Plot 1: Loss Distribution for Non-private and Private Models
 
-![Insert loss distribution plot here](loss_distributions.png)
-
-**Remarks:**
-
-_Add your comments here._
+<img width="1189" height="490" alt="image" src="https://github.com/user-attachments/assets/4be3e08d-03ec-4437-80f3-ea02fe762828" />
 
 ---
 
 ### Plot 2: ROC Curve for the Membership Inference Attack
 
-![Insert ROC curve here](roc_curve.png)
-
-**Remarks:**
-
-_Add your comments here._
+<img width="691" height="547" alt="image" src="https://github.com/user-attachments/assets/2106f1e5-2001-413d-9551-7f909aeb8487" />
 
 ---
 
 ### Plot 3: Randomly Selected Member and Non-member Samples
 
-![Insert sample images here](sample_images.png)
-
-**Remarks:**
-
-_Add your comments here._
+<img width="1389" height="727" alt="image" src="https://github.com/user-attachments/assets/786db0d7-0b0b-4cb1-8776-936f675aa8fe" />
 
 ---
 
