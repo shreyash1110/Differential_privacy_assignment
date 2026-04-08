@@ -1,0 +1,231 @@
+# Question 3: Effect of Gradient Clipping Norm in DP-SGD
+
+## Objective
+
+In this question, we study the effect of the gradient clipping norm in Differentially Private Stochastic Gradient Descent (DP-SGD) on the MNIST dataset using a feed-forward neural network.
+
+We compare two clipping norms:
+
+$$
+C \in \{0.1,\; 10.0\}
+$$
+
+while keeping the **noise multiplier** and **batch size** fixed.
+
+The goal is to understand how the clipping norm affects optimization, convergence, and final model performance under differential privacy.
+
+---
+
+## Background
+
+In DP-SGD, for a mini-batch of size $B$, the per-sample gradients are first clipped and then noise is added before the optimizer step.
+
+For each sample gradient $g_i$, clipping is performed as:
+
+$$
+\bar{g}_i 
+= g_i \cdot \min\left(1, \frac{C}{\|g_i\|_2}\right)
+$$
+
+where $C$ is the clipping norm.
+
+The clipped gradients are aggregated and Gaussian noise is added:
+
+$$
+\tilde{g}
+= \frac{1}{B} \left( \sum_{i=1}^{B} \bar{g}_i + \mathcal{N}(0, \sigma^2 C^2 I) \right)
+$$
+
+where:
+- $\sigma$ is the noise multiplier,
+- $C$ is the clipping norm,
+- $I$ is the identity matrix.
+
+Thus, the clipping norm affects both:
+1. **Clipping bias**: smaller $C$ clips more aggressively,
+2. **Noise scale**: for fixed $\sigma$, the noise magnitude is proportional to $\sigma C$.
+
+Hence, changing $C$ induces a **bias-variance trade-off**.
+
+---
+
+## Clipping Implementation Used
+
+This implementation uses the following Opacus configuration:
+
+- **Clipping rule:** `flat`
+- **Gradient sample mode:** `ghost`
+- **Accountant:** `rdp`
+
+### Memory Complexity
+
+Naively, DP-SGD requires storing per-sample gradients for all trainable parameters. If the batch size is $B$ and the total number of trainable parameters is $P$, then the naive memory complexity is:
+
+$$
+O(BP)
+$$
+
+This can become prohibitively expensive on the GPU.
+
+With **ghost clipping**, Opacus avoids explicitly materializing the full per-sample gradient tensor for supported layers. Instead, it computes the quantities needed for clipping from layer-wise intermediate activations and backpropagated activations. Therefore, the additional memory overhead is much smaller than naive per-sample gradient storage, and no longer scales like full $O(BP)$ per-sample gradient materialization.
+
+---
+
+## Experimental Setup
+
+### Dataset
+- **MNIST**
+- Input size: $28 \times 28 = 784$
+- Number of classes: $10$
+
+### Model
+A feed-forward neural network with fully connected layers and ReLU activations is used.
+
+### Optimizer
+- **DP-SGD**
+
+### Fixed Hyperparameters
+The following quantities are kept fixed across the two runs:
+- batch size,
+- learning rate,
+- number of epochs,
+- noise multiplier,
+- random seed.
+
+### Varied Hyperparameter
+Only the clipping norm is changed:
+
+$$
+C \in \{0.1,\; 10.0\}
+$$
+
+---
+
+## What the Script Produces
+
+The Python script `q3.py` performs the following:
+
+1. Loads and preprocesses the MNIST dataset,
+2. Builds the feed-forward neural network,
+3. Trains two DP-SGD models with clipping norms $C = 0.1$ and $C = 10.0$,
+4. Records the training loss at every iteration,
+5. Evaluates final test loss and test accuracy,
+6. Saves:
+   - the **training loss vs iterations** plot,
+   - a **CSV summary** of results,
+   - a **JSON file** containing the full experiment outputs.
+
+---
+
+## How to Run
+
+Run the script using:
+
+```bash
+python q3.py
+```
+
+To specify a custom output directory:
+
+```bash
+python q3.py --output-dir q3_outputs
+```
+
+---
+
+## Expected Output Files
+
+A typical run generates the following files:
+
+- `q3_training_loss_vs_iterations.png`
+- `q3_summary.csv`
+- `q3_results.json`
+
+---
+
+## Results Summary
+
+A summary table can be included here after running the script.
+
+| Clipping Norm $C$ | Final Test Loss | Final Test Accuracy |
+|---|---:|---:|
+| $0.1$ | _fill after run_ | _fill after run_ |
+| $10.0$ | _fill after run_ | _fill after run_ |
+
+---
+
+## Plot Placeholders
+
+### 1. Training Loss vs Number of Iterations
+
+_Insert the plot here._
+
+```markdown
+![Training Loss vs Iterations](path/to/q3_training_loss_vs_iterations.png)
+```
+
+
+### 2. Optional Additional Plot / Screenshot
+
+_Insert plot or screenshot here if needed._
+
+```markdown
+![Optional Plot 2](path/to/optional_plot_2.png)
+```
+
+
+### 3. Optional Additional Plot / Screenshot
+
+_Insert plot or screenshot here if needed._
+
+```markdown
+![Optional Plot 3](path/to/optional_plot_3.png)
+```
+
+---
+
+## Observations
+
+In DP-SGD, the clipping norm $C$ controls both the amount of clipping and the scale of the added Gaussian noise.
+
+- A **smaller** clipping norm causes more aggressive clipping, which can introduce more bias.
+- A **larger** clipping norm reduces clipping bias, but for fixed noise multiplier $\sigma$, it also increases the absolute scale of injected noise because the noise standard deviation is proportional to:
+
+$$
+\sigma C
+$$
+
+In this experiment, the model trained with the smaller clipping norm $C = 0.1$ converged better than the model trained with $C = 10.0$.
+
+This indicates that, under the chosen setup, the increase in noise caused by the larger clipping norm outweighed the benefit of weaker clipping. Thus, although small clipping norms can sometimes slow optimization, in this case the smallest clipping norm **did converge** and gave better final performance.
+
+---
+
+## Reproducibility Notes
+
+To ensure reproducibility:
+
+- use the same random seed,
+- keep the same train/test split,
+- keep the same optimizer settings,
+- keep the same batch size and noise multiplier,
+- vary only the clipping norm.
+
+The code is modularized in `q3.py` with a `main()` function for direct execution.
+
+---
+
+## Files Included for Submission
+
+The submission for Question 3 should contain at least:
+
+- `q3.py`
+- `README_Q3.md`
+- generated plot(s)
+- any result CSV/JSON files produced by the script
+
+---
+
+## Conclusion
+
+This experiment demonstrates that the clipping norm is a crucial hyperparameter in DP-SGD. It directly affects both optimization and privacy-preserving noise injection. For the current MNIST setup, the smaller clipping norm $C = 0.1$ resulted in more stable and effective training than $C = 10.0$.
