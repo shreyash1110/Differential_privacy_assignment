@@ -193,17 +193,6 @@ The code is modularized in `q3.py` with a `main()` function for direct execution
 
 ---
 
-## Files Included for Submission
-
-The submission for Question 3 should contain at least:
-
-- `q3.py`
-- `README_Q3.md`
-- generated plot(s)
-- any result CSV/JSON files produced by the script
-
----
-
 ## Conclusion
 
 This experiment demonstrates that the clipping norm is a crucial hyperparameter in DP-SGD. It directly affects both optimization and privacy-preserving noise injection. For the current MNIST setup, the smaller clipping norm $C = 0.1$ resulted in more stable and effective training than $C = 10.0$.
