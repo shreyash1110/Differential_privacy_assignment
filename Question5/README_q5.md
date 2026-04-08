@@ -126,11 +126,9 @@ $$
 
 This plot compares optimization behavior over training.
 
-**Placeholder for plot:**
+<img width="855" height="547" alt="image" src="https://github.com/user-attachments/assets/61ea3503-bc63-452f-983a-b13492918924" />
 
-```text
-[Insert Plot Here: Iterations vs Training Loss]
-```
+<img width="691" height="470" alt="image" src="https://github.com/user-attachments/assets/8970703a-d84a-492e-8cb3-c2957c9046f0" />
 
 **Observation:**  
 The non-private methods converge faster and to lower training loss than the private methods.  
@@ -141,12 +139,7 @@ Among the private methods, the added noise and clipping make optimization noisie
 ### 2. Epsilon Spent vs Epochs
 
 This plot shows how privacy budget is consumed during training for the private methods.
-
-**Placeholder for plot:**
-
-```text
-[Insert Plot Here: Epsilon Spent vs Epochs]
-```
+<img width="764" height="547" alt="image" src="https://github.com/user-attachments/assets/e2d2d9c2-81e4-46a4-bc65-41c93e7a10a9" />
 
 **Observation:**  
 The privacy expenditure increases monotonically with epochs.  
@@ -157,27 +150,7 @@ As expected, longer training consumes more privacy budget.
 ### 3. Target Epsilon vs Test Accuracy
 
 This plot compares final test accuracy across privacy budgets and against non-private baselines.
-
-**Placeholder for plot:**
-
-```text
-[Insert Plot Here: Target Epsilon vs Test Accuracy]
-```
-
----
-
-## Summary of Final Results
-
-Fill the table below with your actual outputs:
-
-| Method | Target Epsilon | Final Test Accuracy | Final Test Loss | Final Epsilon Spent |
-|---|---:|---:|---:|---:|
-| SGD | N/A | [fill] | [fill] | N/A |
-| FTRL | N/A | [fill] | [fill] | N/A |
-| DP-SGD | 1 | [fill] | [fill] | [fill] |
-| DP-SGD | 10 | [fill] | [fill] | [fill] |
-| DP-FTRL | 1 | [fill] | [fill] | [fill] |
-| DP-FTRL | 10 | [fill] | [fill] | [fill] |
+<img width="764" height="547" alt="image" src="https://github.com/user-attachments/assets/07829e19-ac27-4761-bcf0-c6ed41caf9e4" />
 
 ---
 
@@ -203,25 +176,6 @@ To reproduce the results:
 3. Run the Question 5 script or notebook from start to finish.
 4. Save the generated plots.
 5. Copy the final numerical outputs into the summary table above.
-
-Example command:
-
-```bash
-python q5.py
-```
-
----
-
-## Files Included
-
-Example expected files:
-
-- `q5.py` — Python script for Question 5
-- `q5-final.ipynb` — notebook version
-- `README.md` — this file
-- plot images for the three required graphs
-
----
 
 ## Conclusion
 
