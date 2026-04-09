@@ -1,10 +1,10 @@
 # CS729 Assignment: Differential Privacy in Machine Learning
 
-**Author:** Shreyash Dwivedi //
-**Roll Number:** 221035 //
-**Course:** CS729: Differential Privacy in Machine Learning //
-**Semester:** 2025-26, II //
-**Date:** April 10, 2026 //
+- **Author:** Shreyash Dwivedi 
+- **Roll Number:** 221035 
+- **Course:** CS729: Differential Privacy in Machine Learning 
+- **Semester:** 2025-26, II
+- **Date:** April 10, 2026 
 
 ## Project Overview
 This repository contains the implementation, experiments, and analysis for the CS729 Differential Privacy in Machine Learning assignment. The overarching objective of this project is to explore and analyze the practical implications of training deep learning models with differential privacy (DP).
