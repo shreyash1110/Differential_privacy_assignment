@@ -4,7 +4,7 @@ This directory contains the solution for **Question 2** of the CS729 Differentia
 
 The objective of this task is to compare the performance and privacy utility of four different privacy accountants for DP-SGD on the MNIST dataset using a feed-forward neural network. We evaluate a manual implementation of the **Advanced Composition Theorem** against three modern accountants provided by the Opacus library: **RDP**, **GDP**, and **PRV**.
 
-## 🚀 Prerequisites and Setup
+## Prerequisites and Setup
 
 Before running the script, ensure you have the necessary libraries installed. 
 
@@ -15,7 +15,7 @@ Before running the script, ensure you have the necessary libraries installed.
 pip install torch torchvision opacus matplotlib pandas numpy
 `
 
-## ⚙️ How to Run
+## How to Run
 
 To execute the experiment, simply run the standalone Python script from your terminal:
 
@@ -30,14 +30,14 @@ python question_2.py
 4. Outputs the progress to the console and generates summary tables.
 5. Automatically saves two comparison plots (`epsilon_vs_epochs.png` and `iterations_vs_loss.png`) in the same directory.
 
-## 🧠 Methodology
+## Methodology
 
 A uniform target privacy budget ($\epsilon = 5.0$) was set for all methods to ensure a fair comparison. 
 
 * **Advanced Composition (Classical Baseline):** Since Opacus does not support standard advanced composition natively, it was implemented manually. The per-step privacy guarantee was computed using the Gaussian mechanism bound, incorporating privacy amplification by subsampling, and then composed over the total number of steps. A binary search was used to find the required noise multiplier.
 * **Modern Accountants (Opacus):** The `rdp`, `gdp`, and `prv` bounds were utilized via Opacus's `get_noise_multiplier` utility to calibrate the noise.
 
-## 📊 Results and Comparisons
+## Results and Comparisons
 
 ### 1. Calibrated Noise Multipliers
 Different accountants require drastically different amounts of noise to satisfy the exact same privacy budget of $\epsilon=5$. 
