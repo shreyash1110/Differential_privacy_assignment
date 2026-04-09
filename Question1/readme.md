@@ -50,7 +50,7 @@ $$
 (\varepsilon, \delta)\text{-DP}
 $$
 
-where $\delta$ is chosen to be a small value based on the dataset size.
+where $\delta$ is chosen to be a small value based on the dataset size (we use **$\delta = 10^{-5}$**).
 
 ---
 
@@ -82,8 +82,6 @@ This plot compares optimization behavior across the private methods by showing h
 
 <img width="1590" height="490" alt="image" src="https://github.com/user-attachments/assets/fa47762b-b6b9-48ef-9327-bc36063de3c1" />
 
-<!-- Example: ![Iterations vs Training Loss](path/to/plot1.png) -->
-
 ---
 
 ### 2. $\varepsilon$ Spent vs Epochs
@@ -91,8 +89,6 @@ This plot compares optimization behavior across the private methods by showing h
 This plot shows how the privacy budget is consumed over training epochs for the private optimizers.
 
 <img width="1590" height="490" alt="image" src="https://github.com/user-attachments/assets/db2d991f-a3af-4b91-a8f9-7098536a09aa" />
-
-<!-- Example: ![Epsilon vs Epochs](path/to/plot2.png) -->
 
 ---
 
@@ -108,7 +104,20 @@ It highlights the privacy-utility tradeoff.
 
 <img width="834" height="463" alt="image" src="https://github.com/user-attachments/assets/75a0914a-1ff0-4903-86ca-0ca44bcac675" />
 
-<!-- Example: ![Target Epsilon vs Test Accuracy](path/to/plot3.png) -->
+---
+
+### 4. Final Results Summary
+
+The table below summarizes the final privacy spent, test loss, and test accuracy metrics after 10 epochs of training across all configurations:
+
+| Run | Optimizer | Private | Target $\varepsilon$ | Final $\varepsilon$ Spent | Final Test Loss | Final Test Accuracy (%) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **SGD_non_private** | SGD | False | non-private | $\infty$ | 0.0600 | 98.34 |
+| **Adam_non_private** | Adam | False | non-private | $\infty$ | 0.0819 | 98.11 |
+| **SGD_dp_eps10** | SGD | True | 10.0 | 9.9927 | 0.4137 | 92.39 |
+| **Adam_dp_eps10** | Adam | True | 10.0 | 9.9927 | 0.5275 | 91.95 |
+| **Adam_dp_eps1** | Adam | True | 1.0 | 0.9940 | 0.6516 | 89.62 |
+| **SGD_dp_eps1** | SGD | True | 1.0 | 0.9940 | 1.3028 | 87.17 |
 
 ---
 
